@@ -6,7 +6,7 @@ public class Signaling : MonoBehaviour
     [SerializeField] private float _volumeChangeRate;
 
     private AudioSource _signalSource;
-    private float _volumeMultiplier;
+    private int _desiredVolume;
 
     private void Awake()
     {
@@ -15,7 +15,10 @@ public class Signaling : MonoBehaviour
 
     private void Update()
     {
-        _signalSource.volume = Mathf.MoveTowards(_signalSource.volume, 1, _volumeChangeRate * Time.deltaTime * _volumeMultiplier);
+        if (_signalSource.volume == _desiredVolume)
+            return;
+
+        _signalSource.volume = Mathf.MoveTowards(_signalSource.volume, _desiredVolume, _volumeChangeRate * Time.deltaTime);
 
         if (_signalSource.volume <= 0)
             _signalSource.Stop();
@@ -24,11 +27,11 @@ public class Signaling : MonoBehaviour
     public void StartSignal()
     {
         _signalSource.Play();
-        _volumeMultiplier = 1;
+        _desiredVolume = 1;
     }
 
     public void StopSignal()
     {
-        _volumeMultiplier = -1;
+        _desiredVolume = 0;
     }
 }
