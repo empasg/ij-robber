@@ -5,6 +5,8 @@
 /UserSettings/
 
 .vs/
+*.gitignore
+*.vsconfig
 
 .gradle/
 
