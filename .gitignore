@@ -6,7 +6,7 @@
 /Recordings/
 
 .vs/
-*.gitignore
+.gitignore
 *.vsconfig
 
 .gradle/
